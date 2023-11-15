@@ -12,10 +12,59 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <head>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    </head>
     
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .sidebar {
+            background-color: #333;
+            padding: 20px;
+            width: 200px;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+        }
+
+        .user-button {
+            display: block;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .user-button:hover {
+            background-color: #555;
+        }
+
+        .bg-pakistan { background-color: #3498db; }
+        .bg-japan { background-color: #e74c3c; }
+        .bg-india { background-color: #2ecc71; }
+        .bg-nepal { background-color: #f39c12; }
+        .bg-iran { background-color: #9b59b6; }
+        .bg-afghanistan { background-color: #1abc9c; }
+        .bg-china { background-color: #34495e; }
+        .bg-southeast { background-color: #d35400; }
+
+
+        .background-div {
+            background-image: url('https://www.mastersoftwaresolutions.com/wp-content/uploads/2019/06/bnr1.png'); /* Set your image path */
+            background-size: 80% 80%; /* Set the size to cover the entire div */
+            background-position: center;
+            height: 100vh;
+            margin-left: 200px; /* Adjust margin to match the sidebar width */
+        }
+    </style>
 </head>
 <body>
     
@@ -27,19 +76,23 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
-                {% comment %} <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}">Home</a>
-                </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'about' %}">About</a>
+                    <a class="nav-link" href="{% url 'landing_page' %}">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'home' %}">Profile</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url "contact" %}">Contact</a>
-                </li>
-     {% endcomment %}
+                
+                {% if user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'chatroom' %}">ChatRooms</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url "logout" %}">Log Out</a>
+                    </li>
+                {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'login' %}">Login</a>
+                    </li>
+
+                {% endif %}
             </ul>
         </div>
     </nav>

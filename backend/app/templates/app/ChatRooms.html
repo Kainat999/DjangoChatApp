@@ -1,55 +1,7 @@
-<!-- chat_rooms_static.html -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chat Rooms</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            padding: 0;
-        }
+{% extends 'base.html' %}
 
-        .sidebar {
-            background-color: #333;
-            padding: 20px;
-            width: 200px;
-            height: 100vh;
-            position: fixed;
-            top: 0;
-            left: 0;
-            overflow-y: auto;
-        }
-
-        .user-button {
-            display: block;
-            color: #fff;
-            text-decoration: none;
-            padding: 10px;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .user-button:hover {
-            background-color: #555;
-        }
-
-        .bg-pakistan { background-color: #3498db; }
-        .bg-japan { background-color: #e74c3c; }
-        .bg-india { background-color: #2ecc71; }
-        .bg-nepal { background-color: #f39c12; }
-        .bg-iran { background-color: #9b59b6; }
-        .bg-afghanistan { background-color: #1abc9c; }
-        .bg-china { background-color: #34495e; }
-        .bg-southeast { background-color: #d35400; }
-    </style>
-</head>
-<body>
-
+{% block content %}
 <div class="sidebar">
     <a href="http://127.0.0.1:8000/pakistan/" class="user-button bg-pakistan">Pakistan</a>
     <a href="http://127.0.0.1:8000/Japan/" class="user-button bg-japan">Japan</a>
@@ -58,8 +10,9 @@
     <a href="http://127.0.0.1:8000/Iran/" class="user-button bg-iran">Iran</a>
     <a href="http://127.0.0.1:8000/Afghanistan/" class="user-button bg-afghanistan">Afghanistan</a>
     <a href="http://127.0.0.1:8000/China/" class="user-button bg-china">China</a>
-    <a href="http://127.0.0.1:8000/southeast/" class="user-button bg-southeast">Southeast</a>
+    <a href="http://127.0.0.1:8000/Southeast/" class="user-button bg-southeast">Southeast</a>
 </div>
+<div class='background-div'>
 
-</body>
-</html>
+</div>
+{% endblock %}
