@@ -28,17 +28,25 @@ class chatConsumer(JsonWebsocketConsumer):
         print('Message received from client.. ', content)
         # find group object
         group = Group.objects.get(name=self.group_name)
-        chat = Chat(
-            content = content['msg'],
-            group = group
-        )
-        chat.save()
-        async_to_sync(self.channel_layer.group_send)(
-            self.group_name,{
-                'type': 'chat.message',
-                'message':content['msg']
-            }
-        )
+        if self.scope['user'].is_authenticated:
+            chat = Chat(
+                content = content['msg'],
+                group = group
+            )
+            chat.save()
+            async_to_sync(self.channel_layer.group_send)(
+                self.group_name,{
+                    'type': 'chat.message',
+                    'message':content['msg']
+                }
+            )
+        else:
+            self.send_json({
+                'message': 'Login Required'
+            })
+            
+        
+        
                 
                 
         
@@ -78,17 +86,24 @@ class chatAsyncConsumer(AsyncJsonWebsocketConsumer):
         print('Message received from client.. ', content)
         # find group object
         group = await database_sync_to_async(Group.objects.get)(name=self.group_name)
-        chat = Chat(
-            content = content['msg'],
-            group = group
-        )
-        await database_sync_to_async(chat.save)()
-        await self.channel_layer.group_send(
-            self.group_name,{
-                'type': 'chat.message',
-                'message':content['msg']
-            }
-        )
+        if self.scope['user'].is_authenticated:
+            chat = Chat(
+                content = content['msg'],
+                group = group
+            
+            )
+            await database_sync_to_async(chat.save)()
+            await self.channel_layer.group_send(
+                self.group_name,{
+                    'type': 'chat.message',
+                    'message':content['msg']
+                }
+            )
+        else:
+            await self.send_json({
+                'message': 'Login Required'
+            })
+        
                 
                 
         

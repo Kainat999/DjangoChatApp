@@ -132,3 +132,6 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+LOGIN_URL = 'login'
+LOGIN_REDIRECT_URL = 'chatroom'
